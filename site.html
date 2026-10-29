@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brew & Bloom — Your Daily Little Ritual</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream: #fdfbf7;
+      --paper: #f7f3ee;
+      --brown: #2a201c;
+      --muted: #7a6b63;
+      --terracotta: #8c4a32;
+      --peach: #d97757;
+      --border: #e6ded5;
+      --serif: "Playfair Display", Georgia, serif;
+      --mono: "DM Mono", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--brown);
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .topbar {
+      height: 78px;
+      max-width: 1240px;
+      margin: auto;
+      padding: 0 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      color: var(--brown);
+      text-decoration: none;
+      font: 21px var(--serif);
+    }
+
+    .brand i,
+    h1 em,
+    h2 em {
+      color: var(--terracotta);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 34px;
+    }
+
+    .nav-links a,
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .nav-links a:hover,
+    footer a:hover {
+      color: var(--terracotta);
+    }
+
+    .bag-button {
+      border: 0;
+      background: transparent;
+      color: var(--brown);
+      font: 500 12px var(--mono);
+    }
+
+    .bag-count {
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      margin-left: 6px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      color: white;
+      font-size: 10px;
+    }
+
+    .hero {
+      max-width: 1240px;
+      margin: auto;
+      padding: 75px 30px 115px;
+      display: grid;
+      grid-template-columns: 1fr 1.08fr;
+      gap: 90px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--terracotta);
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font: 500 10px var(--mono);
+    }
+
+    .eyebrow span {
+      width: 25px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1,
+    h2 {
+      margin: 22px 0;
+      font: 500 clamp(48px, 6vw, 82px) / 0.95 var(--serif);
+      letter-spacing: -0.045em;
+    }
+
+    .hero-intro {
+      max-width: 350px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .hero-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--brown);
+      color: var(--brown);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 190px 190px 12px 12px;
+      filter: saturate(0.82);
+    }
+
+    .stamp {
+      position: absolute;
+      top: 13%;
+      left: -42px;
+      z-index: 2;
+      width: 112px;
+      height: 112px;
+      display: grid;
+      place-content: center;
+      text-align: center;
+      border-radius: 50%;
+      background: var(--peach);
+      color: white;
+      transform: rotate(-12deg);
+      box-shadow: 0 8px 25px #8c4a3240;
+    }
+
+    .stamp strong {
+      font: 24px var(--serif);
+    }
+
+    .stamp small {
+      font: 8px var(--mono);
+    }
+
+    .menu-section {
+      padding: 105px max(30px, calc((100% - 1180px) / 2)) 120px;
+      background: var(--paper);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+    }
+
+    .section-heading h2 {
+      font-size: 58px;
+    }
+
+    .section-note {
+      margin-bottom: 50px;
+      color: var(--muted);
+      font: 12px/1.8 var(--mono);
+    }
+
+    .menu-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 17px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .category-tabs button {
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 30px;
+      background: transparent;
+      color: var(--muted);
+      font: 500 11px var(--mono);
+      transition: 0.25s;
+    }
+
+    .category-tabs button:hover,
+    .category-tabs button.active {
+      background: var(--terracotta);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 220px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      background: var(--cream);
+    }
+
+    .search-box input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--brown);
+      font: 12px var(--mono);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 44px 24px;
+      padding-top: 45px;
+    }
+
+    .menu-card {
+      animation: reveal 0.6s ease both;
+    }
+
+    .menu-card-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu-card-image img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1.08 / 1;
+      object-fit: cover;
+      filter: saturate(0.82);
+      transition: transform 0.5s ease;
+    }
+
+    .menu-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .category-label {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      padding: 6px 8px;
+      background: #fdfbf7e8;
+      color: var(--terracotta);
+      font: 9px var(--mono);
+      text-transform: uppercase;
+    }
+
+    .favorite {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: #fdfbf7e8;
+      color: var(--brown);
+      font-size: 18px;
+    }
+
+    .favorite.active {
+      color: var(--terracotta);
+    }
+
+    .card-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 17px;
+    }
+
+    .card-content h3 {
+      margin: 0 0 6px;
+      font: 500 23px var(--serif);
+    }
+
+    .card-content p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .price {
+      color: var(--terracotta);
+      font: 500 13px var(--mono);
+    }
+
+    .details-button {
+      margin-top: 15px;
+      padding: 0 0 5px;
+      border: 0;
+      border-bottom: 1px solid var(--border);
+      background: transparent;
+      color: var(--brown);
+      font: 600 10px var(--mono);
+    }
+
+    .details-button:hover {
+      color: var(--terracotta);
+    }
+
+    .story {
+      max-width: 1050px;
+      margin: auto;
+      padding: 120px 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 110px;
+      align-items: center;
+    }
+
+    .story-art {
+      min-height: 400px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      background: #e9dfd5;
+    }
+
+    .story-art span {
+      position: absolute;
+      left: 25px;
+      bottom: 25px;
+      color: var(--terracotta);
+      font: italic 17px var(--serif);
+    }
+
+    .story-copy {
+      max-width: 390px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .visit {
+      padding: 80px max(30px, calc((100% - 1050px) / 2));
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      background: var(--brown);
+      color: var(--cream);
+    }
+
+    .visit h2 {
+      margin-bottom: 0;
+      font-size: 58px;
+    }
+
+    .visit-details {
+      color: #c6afa5;
+      font: 12px/1.8 var(--mono);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1240px;
+      margin: auto;
+      padding: 25px 30px;
+      color: var(--muted);
+      font: 10px var(--mono);
+    }
+
+    .bag-summary {
+      position: fixed;
+      right: 24px;
+      bottom: 20px;
+      z-index: 5;
+      padding: 13px 17px;
+      background: var(--terracotta);
+      color: white;
+      box-shadow: 0 8px 25px #2a201c33;
+      font: 11px var(--mono);
+    }
+
+    .modal-background {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: #2a201c99;
+    }
+
+    .modal {
+      position: relative;
+      width: min(720px, 100%);
+      display: grid;
+      grid-template-columns: 45% 55%;
+      background: var(--cream);
+      animation: modalIn 0.25s ease;
+    }
+
+    .modal img {
+      width: 100%;
+      height: 100%;
+      min-height: 430px;
+      object-fit: cover;
+    }
+
+    .modal-content {
+      padding: 45px 38px;
+    }
+
+    .modal-content h2 {
+      margin: 15px 0;
+      font-size: 44px;
+    }
+
+    .modal-content p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--cream);
+      color: var(--brown);
+      font-size: 20px;
+    }
+
+    .add-button {
+      padding: 13px 16px;
+      border: 0;
+      background: var(--terracotta);
+      color: white;
+      font: 500 11px var(--mono);
+    }
+
+    .add-button:hover {
+      background: var(--brown);
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar {
+        padding: 0 18px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 45px;
+        padding: 65px 22px 85px;
+      }
+
+      .hero-image {
+        margin-left: 20px;
+      }
+
+      .stamp {
+        left: -25px;
+      }
+
+      .menu-section {
+        padding: 75px 22px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-note {
+        margin-bottom: 30px;
+      }
+
+      .menu-tools {
+        display: block;
+      }
+
+      .category-tabs {
+        margin-bottom: 15px;
+      }
+
+      .search-box {
+        min-width: 0;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 35px 14px;
+      }
+
+      .card-content h3 {
+        font-size: 18px;
+      }
+
+      .story {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        padding: 75px 22px;
+      }
+
+      .visit {
+        display: block;
+        padding: 65px 22px;
+      }
+
+      .visit-details {
+        margin-top: 40px;
+      }
+
+      .modal {
+        grid-template-columns: 1fr;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal img {
+        min-height: 220px;
+        max-height: 250px;
+      }
+
+      .modal-content {
+        padding: 28px;
+      }
+
+      footer {
+        display: block;
+        line-height: 2;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a href="#" class="brand">Brew <i>&</i> Bloom</a>
+
+    <nav class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#story">Our Story</a>
+      <a href="#visit">Visit Us</a>
+    </nav>
+
+    <button class="bag-button" onclick="scrollToBag()">
+      Bag <span class="bag-count" id="bagCount">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow"><span></span> Small batch, big feeling</div>
+
+        <h1>
+          Your daily<br>
+          <em>little ritual.</em>
+        </h1>
+
+        <p class="hero-intro">
+          Thoughtfully sourced coffee, baked things, and slow moments —
+          made for wherever today takes you.
+        </p>
+
+        <a href="#menu" class="hero-link">Explore the menu ↗</a>
+      </div>
+
+      <div class="hero-image">
+        <div class="stamp">
+          <small>Est.</small>
+          <strong>2024</strong>
+          <small>good days start here</small>
+        </div>
+
+        <img
+          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=85"
+          alt="Coffee and pastry on a café table"
+        />
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow"><span></span> The good stuff</div>
+          <h2>Made with<br><em>intention.</em></h2>
+        </div>
+
+        <p class="section-note">
+          Every cup is a small act of care.<br>
+          Come stay a while.
+        </p>
+      </div>
+
+      <div class="menu-tools">
+        <div class="category-tabs">
+          <button class="active" onclick="filterMenu('All drinks', this)">All drinks</button>
+          <button onclick="filterMenu('Espresso', this)">Espresso</button>
+          <button onclick="filterMenu('Iced coffee', this)">Iced coffee</button>
+          <button onclick="filterMenu('Tea', this)">Tea</button>
+          <button onclick="filterMenu('Pastries', this)">Pastries</button>
+        </div>
+
+        <label class="search-box">
+          🔍
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search the menu"
+            oninput="renderMenu()"
+          />
+        </label>
+      </div>
+
+      <div class="menu-grid" id="menuGrid"></div>
+    </section>
+
+    <section class="story" id="story">
+      <div class="story-art">
+        <div style="font-size: 72px; color: var(--terracotta);">☕</div>
+        <span>slow mornings<br>& good company</span>
+      </div>
+
+      <div>
+        <div class="eyebrow"><span></span> A little about us</div>
+
+        <h2>Pouring a bit<br>of <em>sunshine.</em></h2>
+
+        <p class="story-copy">
+          Brew & Bloom began with a simple idea: the everyday can feel special.
+          We roast with curiosity, bake with patience, and make space for the
+          people who walk through our door.
+        </p>
+      </div>
+    </section>
+
+    <section class="visit" id="visit">
+      <div>
+        <div class="eyebrow">Come find us</div>
+        <h2>Stay for<br><em>one more.</em></h2>
+      </div>
+
+      <div class="visit-details">
+        18 Willow Lane<br>
+        Portland, OR 97205<br><br>
+        Mon — Fri · 7am — 4pm<br>
+        Sat — Sun · 8am — 5pm
+      </div>
+    </section>
+  </main>
+
+  <div class="bag-summary" id="bagSummary">
+    Your order · <span id="bagSummaryCount">0 items</span>
+  </div>
+
+  <footer>
+    <span>© 2024 Brew & Bloom</span>
+    <a href="#">Back to top ↑</a>
+  </footer>
+
+  <div class="modal-background" id="modalBackground" style="display: none;" onclick="closeModal(event)">
+    <div class="modal">
+      <button class="close-modal" onclick="closeModal()">×</button>
+      <img id="modalImage" src="" alt="">
+      <div class="modal-content">
+        <div class="eyebrow"><span></span> Menu item</div>
+        <h2 id="modalName"></h2>
+        <p id="modalDescription"></p>
+
+        <div class="modal-footer">
+          <strong class="price" id="modalPrice"></strong>
+          <button class="add-button" onclick="addToBag()">Add to bag</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const menuItems = [
+      {
+        name: "The Bloom",
+        category: "Espresso",
+        price: 5.50,
+        note: "Honey lavender · oat milk",
+        description: "A silky double espresso softened with oat milk, lavender honey, and a little springtime sweetness.",
+        image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        name: "House Cappuccino",
+        category: "Espresso",
+        price: 4.75,
+        note: "Cocoa dust · silky foam",
+        description: "A classic cappuccino with deeply roasted espresso and cloud-like microfoam, finished with cocoa.",
+        image: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        name: "Cloud Nine",
+        category: "Iced coffee",
+        price: 6.25,
+        note: "Cold brew · vanilla cream",
+        description: "Slow-steeped cold brew, vanilla cream, and a pinch of sea salt over a tall glass of ice.",
+        image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        name: "Citrus Tonic",
+        category: "Iced coffee",
+        price: 5.95,
+        note: "Espresso · orange · tonic",
+        description: "Bright espresso meets sparkling tonic and fresh orange for a beautifully unexpected lift.",
+        image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        name: "Garden Mint",
+        category: "Tea",
+        price: 4.25,
+        note: "Peppermint · lemon balm",
+        description: "A restorative herbal steep of garden mint, lemon balm, and dried citrus peel.",
+        image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        name: "Cardamom Bun",
+        category: "Pastries",
+        price: 4.50,
+        note: "Brown butter · cardamom sugar",
+        description: "Tender, laminated pastry rolled with brown butter and fragrant cardamom sugar.",
+        image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=85"
+      }
+    ];
+
+    let activeCategory = "All drinks";
+    let bagCount = 0;
+    let selectedItem = null;
+
+    function renderMenu() {
+      const grid = document.getElementById("menuGrid");
+      const search = document.getElementById("searchInput").value.toLowerCase();
+
+      const filteredItems = menuItems.filter(item => {
+        const matchesCategory =
+          activeCategory === "All drinks" || item.category === activeCategory;
+
+        const matchesSearch =
+          item.name.toLowerCase().includes(search) ||
+          item.note.toLowerCase().includes(search);
+
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filteredItems.length === 0) {
+        grid.innerHTML = "<p>No menu items found.</p>";
+        return;
+      }
+
+      grid.innerHTML = filteredItems.map((item, index) => `
+        <article class="menu-card" style="animation-delay: ${index * 0.08}s">
+          <div class="menu-card-image">
+            <img src="${item.image}" alt="${item.name}">
+            <button class="favorite" onclick="toggleFavorite(this)">♡</button>
+            <span class="category-label">${item.category}</span>
+          </div>
+
+          <div class="card-content">
+            <div>
+              <h3>${item.name}</h3>
+              <p>${item.note}</p>
+            </div>
+            <strong class="price">$${item.price.toFixed(2)}</strong>
+          </div>
+
+          <button class="details-button" onclick='openModal(${JSON.stringify(item)})'>
+            View details →
+          </button>
+        </article>
+      `).join("");
+    }
+
+    function filterMenu(category, button) {
+      activeCategory = category;
+
+      document.querySelectorAll(".category-tabs button").forEach(btn => {
+        btn.classList.remove("active");
+      });
+
+      button.classList.add("active");
+      renderMenu();
+    }
+
+    function toggleFavorite(button) {
+      button.classList.toggle("active");
+      button.textContent = button.classList.contains("active") ? "♥" : "♡";
+    }
+
+    function openModal(item) {
+      selectedItem = item;
+
+      document.getElementById("modalName").textContent = item.name;
+      document.getElementById("modalDescription").textContent = item.description;
+      document.getElementById("modalPrice").textContent = `$${item.price.toFixed(2)}`;
+
+      const modalImage = document.getElementById("modalImage");
+      modalImage.src = item.image;
+      modalImage.alt = item.name;
+
+      document.getElementById("modalBackground").style.display = "grid";
+    }
+
+    function closeModal(event) {
+      if (!event || event.target.id === "modalBackground" || event.target.classList.contains("close-modal")) {
+        document.getElementById("modalBackground").style.display = "none";
+      }
+    }
+
+    function addToBag() {
+      bagCount++;
+
+      document.getElementById("bagCount").textContent = bagCount;
+      document.getElementById("bagSummaryCount").textContent =
+        `${bagCount} ${bagCount === 1 ? "item" : "items"}`;
+
+      closeModal();
+    }
+
+    function scrollToBag() {
+      document.getElementById("bagSummary").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+
+    renderMenu();
+  </script>
+</body>
+</html>
